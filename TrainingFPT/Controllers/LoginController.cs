@@ -33,9 +33,9 @@ namespace TrainingFPT.Controllers
                 HttpContext.Session.SetString("SessionRoleId", model.RoleId);
                 HttpContext.Session.SetString("SessionEmail", model.Email);
             }
-
-            // chuyen vao trang home
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+        
+                return RedirectToAction(nameof(HomeController.Index), "Home");
+            
         }
 
         [HttpPost]

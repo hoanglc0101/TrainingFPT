@@ -10,10 +10,10 @@ namespace TrainingFPT.Controllers
         [HttpGet]
         public IActionResult Index(string SearchString, string Status)
         {
-            //if (string.IsNullOrEmpty(HttpContext.Session.GetString("SessionUsername")))
-            //{
-            //    return RedirectToAction(nameof(LoginController.Index), "Login");
-            //}
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("SessionUsername")))
+            {
+                return RedirectToAction(nameof(LoginController.Index), "Login");
+            }
 
             CategoryViewModel categoryViewModel = new CategoryViewModel();
             categoryViewModel.CategoryDetailList = new List<CategoryDetail>();
@@ -70,7 +70,7 @@ namespace TrainingFPT.Controllers
                 }
                 return RedirectToAction(nameof(CategoryController.Index), "Category");
             }
-            return View(category);
+            return Ok(PosterImage);
         }
 
 
@@ -103,18 +103,18 @@ namespace TrainingFPT.Controllers
             {
                 var detail = new CategoryQuery().GetDataCategoryById(categoryDetail.Id);
                 string uniquePosterImage = detail.PosterNameImage; // lay lai ten anh cu truoc khi thay anh moi (neu co)
-                // nguoi dung co muon thay anh poster category hay ko?
+                //nguoi dung co muon thay anh poster category hay ko?
                 if (categoryDetail.PosterImage != null)
                 {
-                    // co muon thay doi anh
-                    uniquePosterImage = UploadFileHelper.UploadFile(PosterImage);
+                    //co muon thay doi anh
+                   uniquePosterImage = UploadFileHelper.UploadFile(PosterImage);
                 }
                 bool update = new CategoryQuery().UpdateCategoryById(
                     categoryDetail.Name,
                     categoryDetail.Description,
                     uniquePosterImage,
                     categoryDetail.Status,
-                    categoryDetail.Id );
+                    categoryDetail.Id);
                 if (update)
                 {
                     TempData["updateStatus"] = true;
@@ -127,8 +127,9 @@ namespace TrainingFPT.Controllers
             }
             catch (Exception ex)
             {
-                // return Ok(ex.Message);
+                //return Ok(ex.Message);
                 return View(categoryDetail);
+                //return Ok(uniquePosterImage);
             }
         }
     }

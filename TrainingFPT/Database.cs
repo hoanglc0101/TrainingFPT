@@ -6,7 +6,7 @@ namespace TrainingFPT
     {
         public static string GetStringConnection()
         {
-            string strConnection = @"Data Source=NGUYENTHANH63B6;Initial Catalog=TrainingFPT;Integrated Security=True;Trust Server Certificate=True";
+            string strConnection = @"Data Source=DESKTOP-IEE74KN\MAY1;Initial Catalog=TrainingFPT;Integrated Security=True;Trust Server Certificate=True";
             return strConnection;
         }
 
